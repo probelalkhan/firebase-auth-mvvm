@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <data>
+        <variable name="viewmodel"
+                  type="net.simplifiedcoding.ui.auth.AuthViewModel"/>
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#008577"
+                    android:orientation="vertical"
+                    tools:context=".ui.auth.LoginActivity"
+                    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+        <RelativeLayout
+                android:id="@+id/loginLayout"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/login_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="Account Login"
+                    android:textColor="#fff"
+                    android:textSize="26sp"
+                    android:textStyle="bold"/>
+
+            <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/login_title"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="70dp"
+                    android:background="#fff"
+                    android:elevation="4dp"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="30dp">
+
+
+                    <TextView
+                            android:labelFor="@id/text_email"
+                            android:text="email"
+                            android:fontFamily="sans-serif-light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <EditText
+                            android:id="@+id/text_email"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_email"
+                            android:drawablePadding="10dp"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.email}"
+                            android:layout_marginBottom="10dp"
+                            android:hint="john@gmail.com"
+                            android:inputType="textEmailAddress"/>
+
+                    <TextView
+                            android:labelFor="@id/edit_text_password"
+                            android:text="password"
+                            android:fontFamily="sans-serif-light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <EditText
+                            android:drawablePadding="10dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.password}"
+                            android:id="@+id/edit_text_password"
+                            android:drawableLeft="@drawable/ic_lock"
+                            android:hint="Password"
+                            android:inputType="textPassword"/>
+
+
+                    <TextView
+                            android:id="@+id/text_view_forget_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:paddingTop="5dp"
+                            android:text="Forgot Password?"/>
+
+
+                    <Button
+                            android:id="@+id/button_sign_in"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="22dp"
+                            android:onClick="@{() -> viewmodel.login()}"
+                            android:background="#d67601"
+                            android:text="Log in"
+                            android:textAllCaps="false"
+                            android:textColor="#fff"
+                            android:textSize="18sp"/>
+
+                    <TextView
+                            android:id="@+id/text_view_register"
+                            android:layout_gravity="center_horizontal"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            android:textAlignment="center"
+                            android:onClick="@{(v) -> viewmodel.goToSignup(v)}"
+                            android:text="Don't have an account.\nRegister Here"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageButton
+                    android:id="@+id/user_profile_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/login_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/user_profile_image_background"
+                    android:elevation="4dp"
+                    android:src="@drawable/ic_boy"/>
+
+        </RelativeLayout>
+
+        <ProgressBar
+                android:id="@+id/progressbar"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>
