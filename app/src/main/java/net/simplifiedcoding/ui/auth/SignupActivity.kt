@@ -9,23 +9,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_signup.*
 import net.simplifiedcoding.R
-import net.simplifiedcoding.data.firebase.FirebaseSource
-import net.simplifiedcoding.data.repositories.UserRepository
 import net.simplifiedcoding.databinding.ActivitySignupBinding
 import net.simplifiedcoding.ui.home.HomeActivity
 import net.simplifiedcoding.utils.startHomeActivity
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class SignupActivity : AppCompatActivity(), AuthListener {
+class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
+
+    override val kodein by kodein()
+    private val factory : AuthViewModelFactory by instance()
 
     private lateinit var viewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-
-        val firebaseSource = FirebaseSource()
-        val repository = UserRepository(firebaseSource)
-        val factory = AuthViewModelFactory(repository)
 
         val binding: ActivitySignupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)

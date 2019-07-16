@@ -5,22 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import net.simplifiedcoding.R
-import net.simplifiedcoding.data.firebase.FirebaseSource
-import net.simplifiedcoding.data.repositories.UserRepository
 import net.simplifiedcoding.databinding.ActivityHomeBinding
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), KodeinAware {
+
+    override val kodein by kodein()
+    private val factory : HomeViewModelFactory by instance()
 
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-
-        val firebaseSource = FirebaseSource()
-        val repository = UserRepository(firebaseSource)
-        val factory = HomeViewModelFactory(repository)
 
         val binding: ActivityHomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
